@@ -2,9 +2,13 @@ import json
 
 class control:
     def __init__(self):
-        self.generalInfo = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
+        self.letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
                                      "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
                                      "V", "W", "X", "Y", "Z"]
+
+        self.negatedLetters = ["Ā", "B̄", "C̄", "D̄", "Ē", "F̄", "Ḡ", "H̄", "Ī", "J̄", "K̄",
+                          "L̄", "M̄", "N̄", "Ō", "P̄", "Q̄", "R̄", "S̄", "T̄", "Ū",
+                          "V̄", "W̄", "X̄", "Ȳ", "Z̄"]
 
         self.booleanExpression = {}
         self.amountOfVariables = 0
@@ -14,24 +18,47 @@ class control:
     def creator(self):
         self.amountOfVariables = int(input("Choose amount of variables: "))
 
-        self.letters()
+        self.startLetters()
 
-        self.dividerLines(len(self.letterStart))
+        self.dividerLines()
 
         for i in range(0, 2 ** self.amountOfVariables):
             self.decimalNumber = i
             binary = self.binaryToDecimal()
 
             print(f"| {i} {binary} ")
-            self.dividerLines(len(self.letterStart))
+            self.dividerLines()
             # self.booleanExpression[i] = binary
 
         self.writter()
+        self.SOPcreator()
 
-    def letters(self):
+    def SOPcreator(self):
+        # booleans = []
+        # with open("information.json", "r") as f:
+        #     booleans = list(json.load(f).values())
+        # booleans = list(self.booleanExpression.values())
+
+        SOPexpression = []
+        for value in list(self.booleanExpression.values()):
+            sop = ""
+            # print(value)
+            list(value)
+            for i, num in enumerate(value):
+                if num == "1":
+                    sop += f"{self.letters[i]}"
+
+                else:
+                    sop += f"{self.negatedLetters[i]}"
+            SOPexpression.append(sop)
+
+        finalSOP = " + ".join(SOPexpression)
+        print(finalSOP)
+
+    def startLetters(self):
 
         for i in range(0, self.amountOfVariables):
-            self.letterStart += f"| {self.generalInfo[i]} "
+            self.letterStart += f"| {self.letters[i]} "
 
         self.letterStart += "|"
         print(self.letterStart)
@@ -67,12 +94,67 @@ class control:
 
         return completed
 
-    def dividerLines(self, amountVar):
-        amount = int(amountVar)
+    def dividerLines(self):
+        amount = int(len(self.letterStart))
         dividerLine = "-" * amount
 
         print(dividerLine)
 
-create = control()
+# create = control()
+# create.creator()
 
-create.creator()
+letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
+                                     "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
+                                     "V", "W", "X", "Y", "Z"]
+with open("information.json", "r") as f:
+    booleans =json.load(f)
+
+
+
+y = list(booleans.values())
+length = 4
+
+listA = []
+positionsA = []
+
+listB = []
+positionsB = []
+
+if length % 2 == 0:
+    for value in y:
+        x = list(value)
+        firstPart = ""
+        secondPart = ""
+
+        for i in range(0, length // 2):
+            firstPart += x[i]
+        listA.append(firstPart)
+
+        for i in range(length - 1, length // 2 - 1, -1):
+            secondPart += x[i][::-1]
+
+        send = secondPart[::-1]
+        listB.append(send)
+
+# print(listA)
+# print(listB)
+
+#Binary to Decimal
+
+for value in listA:
+    x= 0
+    value = list(value)
+
+    for i, digit in enumerate(value):
+        x += 2 ** (length // 2 - i) * int(digit)
+
+
+print(listA)
+
+for value in listA:
+    value = list(value)
+    x = 0
+    for i in range (0, len(value)):
+        print(value[i])
+        x += (2 ** i) * int(value[i])
+
