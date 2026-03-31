@@ -100,8 +100,8 @@ class control:
 
         print(dividerLine)
 
-# create = control()
-# create.creator()
+#create = control()
+#create.creator()
 
 letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
                                      "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
@@ -115,10 +115,10 @@ y = list(booleans.values())
 length = 4
 
 listA = []
-positionsA = []
+resultA = []
 
 listB = []
-positionsB = []
+resultB = []
 
 if length % 2 == 0:
     for value in y:
@@ -136,25 +136,74 @@ if length % 2 == 0:
         send = secondPart[::-1]
         listB.append(send)
 
+# number = (list("1110"))[::-1]
+# result = 0
+#
+# for i in range(0, len(number)):
+#     result += (2 ** i) * int(number[i])
+
+# print(result)
+
+for i in listA:
+    number = (list(i))[::-1]
+    result = 0
+
+    for i in range(0, len(number)):
+        result += (2 ** i) * int(number[i])
+    #print(result)
+    resultA.append(result)
+
+for i in listB:
+    number = (list(i))[::-1]
+    result = 0
+
+    for i in range(0, len(number)):
+        result += (2 ** i) * int(number[i])
+    resultB.append(result)
+
+for i in range(0, len(resultA)):
+    print(f"A = {resultA[i]} | B = {resultB[i]}")
+    if int(resultA[i]) > int(resultB[i]):
+        print("A IS HIGHER THAN B")
+    elif int(resultA[i]) < int(resultB[i]):
+        print("B IS HIGHER THAN A")
+
+    elif int(resultA[i]) == int(resultB[i]):
+        print("A AND B ARE EQUAL")
+
+
+print(resultA)
+print(resultB)
+#print(listB)
 # print(listA)
-# print(listB)
 
 #Binary to Decimal
 
-for value in listA:
-    x= 0
-    value = list(value)
+# for value in listA:
+#     x= 0
+#     value = list(value)
+#
+#     for i, digit in enumerate(value):
+#         x += 2 ** (length // 2 - i) * int(digit)
 
-    for i, digit in enumerate(value):
-        x += 2 ** (length // 2 - i) * int(digit)
+# for value in listA:
+#     value = list(value)
+#     x = 0
+#     for i in range (0, len(value)):
+#         print(value[i])
+#         x += (2 ** i) * int(value[i])
+#
+# for i in listA:
+#     print(i)
+#
 
 
-print(listA)
+#def BinaryToDecimal():
+    #num = "1110"
 
-for value in listA:
-    value = list(value)
-    x = 0
-    for i in range (0, len(value)):
-        print(value[i])
-        x += (2 ** i) * int(value[i])
+    #length = len(num)
+    # num = list(num)
+    # num = num[::-1]
 
+
+#BinaryToDecimal()
